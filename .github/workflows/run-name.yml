@@ -14,7 +14,8 @@ jobs:
       - name: Get name
         if: ${{ github.event.inputs.person_name != '' }}
         run: |
-          echo "WORKFLOW_NAME=${github.event.inputs.person_name}" >> $GITHUB_ENV
+          PERSON_NAME=${{ github.event.inputs.person_name }}
+          echo "WORKFLOW_NAME=$( echo $PERSON_NAME)" >> $GITHUB_ENV
       - name: Checkout
         uses: actions/checkout@v3
       - uses: actions/setup-python@v4
