@@ -1,4 +1,4 @@
-name: run with a new name
+name: run-with-a-new-name
 
 on:
   workflow_dispatch:
