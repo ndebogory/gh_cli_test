@@ -1,0 +1,23 @@
+name: run with a new name
+
+on:
+  workflow_dispatch:
+    inputs:
+      person_name:
+        description: 'A name to greet'
+        required: false
+
+jobs:
+  run_greeting:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get name
+        if: ${{ github.event.inputs.person_name != '' }}
+        run: |
+          echo "WORKFLOW_NAME=${github.event.inputs.person_name}" >> $GITHUB_ENV
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - run: python hello_world.py

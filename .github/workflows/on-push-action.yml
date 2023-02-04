@@ -1,0 +1,25 @@
+name: linter check
+
+on:
+  push
+
+jobs:
+  linter-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.10'
+      - run: pip install flake8
+      - name: Flake8 action
+        uses: julianwachholz/flake8-action@v2
+        with:
+          checkName: "linter-check"
+          #path: path/to/files
+          plugins: pep8-naming
+          config: setup.cfg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
